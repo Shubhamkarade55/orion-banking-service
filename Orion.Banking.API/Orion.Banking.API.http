@@ -1,0 +1,6 @@
+@Orion.Banking.API_HostAddress = http://localhost:5198
+
+GET {{Orion.Banking.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
