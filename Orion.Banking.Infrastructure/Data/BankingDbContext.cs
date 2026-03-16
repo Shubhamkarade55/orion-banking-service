@@ -16,5 +16,6 @@ namespace Orion.Banking.Infrastructure.Data
         }
 
         public DbSet<Account> Accounts => Set<Account>();
+        public DbSet<User>Users => Set<User>();
     }
 }

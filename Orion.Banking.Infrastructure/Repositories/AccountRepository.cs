@@ -1,16 +1,13 @@
-﻿using Orion.Banking.Application.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Orion.Banking.Application.Interfaces;
 using Orion.Banking.Domain.Entities;
 using Orion.Banking.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Orion.Banking.Infrastructure.Repositories
 {
-    public class AccountRepository : IAccountRepository   
+    public class AccountRepository : IAccountRepository
     {
         private readonly BankingDbContext _context;
 
@@ -35,5 +32,10 @@ namespace Orion.Banking.Infrastructure.Repositories
             return await _context.Accounts.ToListAsync();
         }
 
+        public async Task UpdateAsync(Account account)
+        {
+            _context.Accounts.Update(account);
+            await _context.SaveChangesAsync();
+        }
     }
 }

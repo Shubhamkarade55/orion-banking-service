@@ -1,18 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Orion.Banking.Domain.Entities
 {
+    [Table("Accounts")]
     public class Account
     {
+        [Key]
+        [Column("AccountId")]
         public Guid Id { get; private set; }
+
+        [Required]
+        [MaxLength(20)]
         public string AccountNumber { get; private set; }
+
+        [Required]
+        [MaxLength(100)]
         public string HolderName { get; private set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Balance { get; private set; }
 
+        // ✅ Required by EF Core
+        protected Account() { }
+
+        // ✅ Domain constructor
         public Account(string accountNumber, string holderName)
         {
             Id = Guid.NewGuid();
@@ -39,6 +52,5 @@ namespace Orion.Banking.Domain.Entities
 
             Balance -= amount;
         }
-
     }
 }
